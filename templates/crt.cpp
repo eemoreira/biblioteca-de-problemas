@@ -26,5 +26,5 @@ pair<long long, long long> crt(vector<long long>& a, vector<long long>& m){
     }
     a0 += m0;
     a0 %= m0;
-    return mp(a0,m0);
+    return make_pair(a0,m0);
 }
