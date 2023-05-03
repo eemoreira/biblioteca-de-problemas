@@ -5,7 +5,7 @@ typedef tuple<int,int,int> i3;
 typedef long long ll;
 typedef pair<int,int> ii;
 
-#ifdef DEBUG
+#ifdef LOCAL_DEBUG
 #include "debug.h"
 #else
 #define dbg(x...)
