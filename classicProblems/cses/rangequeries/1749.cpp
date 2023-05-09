@@ -1,6 +1,12 @@
 #include <bits/stdc++.h>
 
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
 using namespace std;
+
+template <class T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
 typedef tuple<int,int,int> i3;
 typedef long long ll;
 typedef pair<int,int> ii;
@@ -10,48 +16,26 @@ typedef pair<int,int> ii;
 #else
 #define dbg(x...)
 #endif
+
 const int maxn = 2e5 + 5;
-int n;
-ll f[maxn], a[maxn];
-
-void update(int i, ll v) {
-    while (i <= n) {
-        f[i] += v;
-        i += i & -i;
-    }
-}
-
-ll query(int i) {
-    ll ans = 0;
-    while (i) {
-        ans += f[i];
-        i -= i & -i;
-    }
-    return ans;
-}
+int a[maxn];
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    int n;
     cin >> n;
+    ordered_set<int> S;
     for (int i = 1; i <= n; i++) {
         cin >> a[i];
-    }
-    for (int i = 1; i <= n; i++) {
-        update(i, i);
-        update(i + 1, -i);
+        S.insert(i);
     }
     for (int i = 0; i < n; i++) {
         int x;
         cin >> x;
-        int y = query(x);
-        int ans = 0;
-        int l = 1, r = n;
-        while (l <= r) {
-            int mid = (l + r)
-        }
-        cout << a[y] << " \n"[i == n - 1];
-        update(y, -1);
+        int pos = *S.find_by_order(x - 1);
+        S.erase(pos);
+        cout << a[pos] << " \n"[i == n - 1];
     }
 }
 
