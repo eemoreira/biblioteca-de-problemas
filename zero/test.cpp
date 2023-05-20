@@ -12,19 +12,19 @@ typedef pair<int,int> ii;
 #endif
 
 /* stop freaking out pls */
-void solve() {
 
-}
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    solve();
+  int n = 60, q = 500000;
+  cout << n << ' ' << q << '\n';
+  for (int i = 0; i < q; i++) {
+    cout << 5 << ' ' << 3 << '\n';
   }
 }
+
 
 
 

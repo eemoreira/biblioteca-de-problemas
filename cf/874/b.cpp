@@ -12,27 +12,31 @@ typedef pair<int,int> ii;
 #endif
 
 /* stop freaking out pls */
-const int mod = 1e9 + 7;
-
 void solve() {
-  int n;
-  cin >> n;
-  vector<int> a(n), b(n);
-  for (auto &u : a) cin >> u;
-  for (auto &u : b) cin >> u;
-  sort(a.begin(), a.end());
-  sort(b.begin(), b.end());
-  vector<ll> ans(n);
-  for (int i = 0, j = 0; i < n; i++) {
-    while (j < n && a[i] > b[j]) j++;
-    ans[i] = max(0ll, (ll) j - i);
+  int n, k;
+  cin >> n >> k;
+  vector<ii> a(n);
+  vector<int> b(n);
+  for (int i = 0; i < n; i++) {
+    cin >> a[i].first;
+    a[i].second = i;
   }
-  ll res = 1;
-  for (int i = 0; i < n; i++) res = res * ans[i] % mod;
-  cout << res << '\n';
+  sort(a.begin(), a.end());
+  for (auto &u : b) {
+    cin >> u;
+  }
+  sort(b.begin(), b.end());
+  vector<int> ans(n);
+  for (int i = 0; i < n; i++) {
+    ans[a[i].second] = b[i];
+  }
+  for (auto u : ans) {
+    cout << u << ' ';
+  }
+  cout << '\n';
 }
 
-int main() {
+int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int tt;

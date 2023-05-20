@@ -1,0 +1,71 @@
+syntax on
+autocmd BufNewFile *.cpp 0r ~/codes/clean.cpp
+
+set background=dark
+set termguicolors
+
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'Stoozy/vimcord'
+Plug 'ThePrimeagen/vim-be-good'
+Plug 'nikolvs/vim-sunbather'
+Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-commentary'
+Plug 'frazrepo/vim-rainbow'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'vim-airline/vim-airline'
+Plug 'sheerun/vim-polyglot'
+Plug 'yassinebridi/vim-purpura'
+Plug 'adigitoleo/vim-mellow', { 'tag': '*' }
+Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '~/my-prototype-plugin'
+Plug 'vimsence/vimsence'
+
+call plug#end()
+" last position
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
+set number
+" Show line numbers
+
+" Blink cursor on error instead of beeping (grr)
+set belloff=all
+" Encoding
+set encoding=utf-8
+" Whitespace
+set smarttab
+set nowrap
+set formatoptions=tcqrn1
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set noshiftround
+
+" Searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+
+" set autoindent
+filetype plugin indent on
+set guicursor=i:block
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+

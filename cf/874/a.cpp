@@ -13,7 +13,18 @@ typedef pair<int,int> ii;
 
 /* stop freaking out pls */
 void solve() {
-
+  int n;
+  cin >> n;
+  string s;
+  cin >> s;
+  set<string> a;
+  for (int i = 1; i < n; i++) {
+    string now;
+    now += s[i];
+    now += s[i - 1];
+    a.emplace(now);
+  }
+  cout << a.size() << '\n';
 }
 
 int main(){
@@ -25,6 +36,7 @@ int main(){
     solve();
   }
 }
+
 
 
 

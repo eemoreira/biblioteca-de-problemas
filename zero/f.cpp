@@ -1,38 +1,46 @@
 #include <bits/stdc++.h>
-#define endl '\n'
 
 using namespace std;
+typedef tuple<int,int,int> i3;
 typedef long long ll;
-typedef vector<int> vi;
 typedef pair<int,int> ii;
-typedef priority_queue<ii, vector<ii>, greater<ii>> pqg;
-#define mp make_pair
-#define fst first
-#define snd second
-#define all(x) begin(x), end(x)
-#define sor(x) sort(all(x)) 
-#define pb push_back
-#define eb emplace_back
 
-int ok2321 = 0;
+#ifdef LOCAL_DEBUG
+#include "debug.h"
+#else
+#define dbg(x...)
+#endif
 
-void solve(){
-    int n; cin >> n;
-    vi a(n), b(n);
-    for(auto&u:a)cin>>u;
-    for(auto&u:b)cin>>u;
-    sor(a); sor(b);
-    
+/* stop freaking out pls */
+
+const int zero = 1e3;
+
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> a(n), b(n);
+  for (auto &u : a) {
+    cin >> u;
+    u += zero;
+  }
+  for (auto &u : b) {
+    cin >> u;
+    u += zero;
+  }
+
 }
 
 int main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-    int tc=1;
-	if(ok2321) cin >> tc;
-    while(tc--) solve();
-	return 0;
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int tt;
+  cin >> tt;
+  while (tt--) {
+    solve();
+  }
 }
+
+
 
 
 
