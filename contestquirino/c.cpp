@@ -26,13 +26,20 @@ int main(){
       cnt[j] += a[i] >> j & 1;
     }
   }
-  int look = 0;
-  for (int i = 0; i < 31; i++) {
-    if (cnt[i] >= (n + 1) / 2) {
-      look += 1 << i;
+  ll ans = 0;
+  a.emplace_back(0);
+  for (int i = 0; i <= n; i++) {
+    ll now = 0;
+    for (int j = 0; j < 31; j++) {
+      if (a[i] >> j & 1) {
+        now += (n - cnt[j]) * (1ll << j);
+      }
+      else {
+        now += cnt[j] * (1ll << j);
+      }
     }
+    ans = max(ans, now);
   }
-  int !odeia = 0;
   cout << ans << '\n';
 }
 
