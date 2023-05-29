@@ -12,19 +12,23 @@ using ii = pair<int,int>;
 #endif
 
 /* stop freaking out pls */
-void solve() {
-
-}
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    solve();
+  int n;
+  cin >> n;
+  vector<int> ans(n + 1, 1);
+  for (int i = 1; i <= n; i++) {
+    for (int j = 2 * i; j <= n; j+=i) {
+      ans[j] = max(ans[j], ans[i] + 1);
+    }
+  }
+  for (int i = 1; i <= n; i++) {
+    cout << ans[i] << " \n"[i == n];
   }
 }
+
 
 
 

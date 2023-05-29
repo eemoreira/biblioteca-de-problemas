@@ -13,7 +13,15 @@ using ii = pair<int,int>;
 
 /* stop freaking out pls */
 void solve() {
-
+  int x, k;
+  cin >> x >> k;
+  if (x % k) {
+    cout << 1 << '\n' << x << '\n';
+  }
+  else {
+    cout << 2 << '\n';
+    cout << 1 << ' ' << x - 1 << '\n';
+  }
 }
 
 int main() {
@@ -25,6 +33,7 @@ int main() {
     solve();
   }
 }
+
 
 
 

@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+using i3 = tuple<int,int,int>;
+using i64 = long long;
+using ii = pair<int,int>;
+
+#ifdef LOCAL_DEBUG
+#include "debug.h"
+#else
+#define dbg(x...)
+#endif
+
+/* stop freaking out pls */
+void solve() {
+
+}
+
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  i64 x, y, z;
+  cin >> x >> y >> z;
+  string s;
+  cin >> s;
+  vector<ii> a;
+  int n = s.size();
+  for (int i = 0; i < n; i++) {
+    int cnt = 1;
+    int now = s[i] == 'A';
+    while (i < n-1 && s[i] == s[i + 1]) {
+      i++;
+      cnt++;
+    }
+    a.emplace_back(cnt, now);
+  }
+  n = a.size();
+  vector<vector<i64>> dp(n + 1, vector<i64>(2, 1e18));
+  dp[0][0] = 0;
+  dp[0][1] = z;
+  dbg(a);
+  for (int i = 1; i <= n; i++) {
+    int now = a[i - 1].second;
+    i64 val = a[i - 1].first;
+    dp[i][now] = min(dp[i - 1][now] + x * val, dp[i - 1][!now] + z + x * val);
+    dp[i][!now] = dp[i - 1][!now] + y * val;
+  }
+  cout << min(dp[n][0], dp[n][1]) << '\n';
+}
+
+
+
+
+

@@ -12,19 +12,28 @@ using ii = pair<int,int>;
 #endif
 
 /* stop freaking out pls */
-void solve() {
-
-}
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    solve();
+  int n, k;
+  cin >> n >> k;
+  vector<int> a(n);
+  for (auto &u : a) {
+    cin >> u;
   }
+  int x = 0;
+  map<int,int> f;
+  f[0]++;
+  i64 ans = 0;
+  for (int i = 0; i < n; i++) {
+    x += a[i];
+    ans += f[x - k];
+    f[x]++;
+  }
+  cout << ans << '\n';
 }
+
 
 
 

@@ -13,7 +13,23 @@ using ii = pair<int,int>;
 
 /* stop freaking out pls */
 void solve() {
-
+  int n, m;
+  cin >> n >> m;
+  if (m < n) {
+    cout << 0 << '\n';
+    return;
+  }
+  int now = 0;
+  int ans = 0;
+  for (int i = 30; i >= 0; i--) {
+    now ^= 1 << i;
+    /* dbg(ans, ans & (~n)); */
+    if (1LL * (now & (~n)) + n > m) {
+      ans = n ^ ((now & (~n)) + n);
+      now ^= 1 << i;
+    }
+  }
+  cout << ans << '\n';
 }
 
 int main() {
@@ -25,6 +41,7 @@ int main() {
     solve();
   }
 }
+
 
 
 

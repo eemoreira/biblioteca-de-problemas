@@ -13,7 +13,20 @@ using ii = pair<int,int>;
 
 /* stop freaking out pls */
 void solve() {
-
+  int n;
+  cin >> n;
+  string s;
+  cin >> s;
+  int ans = 0;
+  for (int i = 0; i < n; i++) {
+    int now = 1;
+    while (i < n-1 && s[i + 1] == s[i]) {
+      now++;
+      i++;
+    }
+    ans = max(ans, now + 1);
+  }
+  cout << ans << '\n';
 }
 
 int main() {
@@ -25,6 +38,7 @@ int main() {
     solve();
   }
 }
+
 
 
 

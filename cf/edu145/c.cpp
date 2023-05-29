@@ -1,48 +1,54 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+typedef tuple<int,int,int> i3;
+typedef long long ll;
+typedef pair<int,int> ii;
 
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL_DEBUG
 #include "debug.h"
 #else
 #define dbg(x...)
 #endif
 
 /* stop freaking out pls */
-void solve() {
-    int n,k;
-    cin >> n >> k;
-    int t = -1;
-    int c = 0;
-    int cnt = 0;
-    for (int i = 1; i <= n; i++) {
-        c += i;
-        cnt++;
-        if (__builtin_popcount(c) == 1) {
-            if (k >> (c - 1) & 1) {
-                cout << cnt * (-t + 1) << ' ';
-                t = cnt * (t - 1) - 1;
-                cnt = 0;
-            }
-            else {
-                cout << t << ' ';
-            }
-        }
-        else {
-            cout << t << ' ';
-        }
+
+vector<int> ans;
+void go(int n, int k) {
+  if (n == 0) {
+    return;
+  }
+  if (k < n) {
+    ans = vector<int> (n, -1);
+    if (k) {
+      ans[k - 1] = 100;
     }
-    cout << '\n';
+    ans[k] = -200;
+  }
+  else {
+    go(n - 1, k - n);
+    ans.emplace_back(1000);
+  }
 }
 
-int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    int tt;
-    cin >> tt;
-    while (tt--) {
-        solve();
-    }
+auto solve() -> void {
+  int n, k;
+  cin >> n >> k;
+  ans.clear();
+  go(n, k);
+  for (int i = 0; i < n; i++) {
+    cout << ans[i] << " \n"[i == n - 1];
+  }
+}
+
+auto main() -> int32_t {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int tt;
+  cin >> tt;
+  while (tt--) {
+    solve();
+  }
 }
 
 

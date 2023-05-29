@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-typedef tuple<int,int,int> i3;
-typedef long long ll;
-typedef pair<int,int> ii;
+using i3 = tuple<int,int,int>;
+using i64 = long long;
+using ii = pair<int,int>;
 
 #ifdef LOCAL_DEBUG
 #include "debug.h"
@@ -13,7 +13,7 @@ typedef pair<int,int> ii;
 
 /* stop freaking out pls */
 
-template<typename T = int, T mod = 1000000007, typename U = long long>
+template<typename T = int, T mod = 1'000'000'007, typename U = long long>
 struct umod {
     T val;
     umod(): val(0){};
@@ -48,86 +48,59 @@ struct umod {
 };
  
 const int MODD = 998244353;
-using mint = umod<int, MODD, ll>;
+using mint = umod<int, MODD, i64>;
 ostream& operator << (ostream& os, mint oth) {
     os << oth.val; return os;
 }
 
-class dsu {
-public:
-    vector<int> p;
-    int n;
-    vector<int> sz, e;
-    dsu(int _n) : n(_n){
-        p.resize(n);
-        iota(p.begin(), p.end(), 0);
-        sz.assign(n, 1);
-        e.assign(n, 0);
-    }
-    inline int find(int x){
-        return x == p[x] ? x : (p[x] = find(p[x]));
-    }
-    inline bool unite(int x, int y){
-        x = find(x);
-        y = find(y);
-        if (sz[y] < sz[x]) swap(y, x);
-        if(x != y){
-            p[x] = y;
-            sz[y] += sz[x];
-            e[y] += e[x];
-            sz[x] = 0;
-            return true;
-        }
-        return false;
-    }
-};
-
-void solve() {
-  int n;
-  cin >> n;
-  vector<int> a(n), b(n);
-  for (auto &u : a) {
-    cin >> u;
-    --u;
-  }
-  for (auto &u : b) {
-    cin >> u;
-    --u;
-  }
-  dsu d(n);
-  for (int i = 0; i < n; i++) {
-    d.unite(a[i], b[i]);
-    d.e[d.find(a[i])]++;
-  }
-  vector<int> good(n);
-  for (int i = 0; i < n; i++) {
-    if (a[i] == b[i]) {
-      good[d.find(a[i])] = 1;
-    }
-  }
-  mint ans = 1;
-  for (int i = 0; i < n; i++) {
-    if (d.find(i) == i) {
-      if (d.sz[i] == d.e[i]) {
-        ans *= mint(good[i] ? n : 2);
-      }
-      else {
-        cout << 0 << '\n';
-        return;
-      }
-    }
-  }
-  cout << ans << '\n';
-}
-
-auto main() -> int {
+int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    solve();
+  int n;
+  cin >> n;
+  vector<int> a(1 << n);
+  for (auto &u : a) {
+    cin >> u;
   }
+
+  mint ans = 1;
+
+  for (int o = 0; o < n; o++) {
+    vector<int> new_a;
+    int k = a.size();
+    i64 losers = 0;
+    dbg(k, a);
+    for (int i = 0; i < k; i+=2) {
+      if (a[i] == a[i + 1] && a[i] == -1) {
+        ans *= 2;
+        new_a.emplace_back(-1);
+        ans *= mint(++losers);
+      }
+      else if (a[i] != -1 && a[i + 1] != -1) {
+        if ((a[i] <=  k / 2) == (a[i + 1] <= k / 2)) {
+          cout << 0 << '\n';
+          return 0;
+        }
+        else {
+          new_a.emplace_back(min(a[i], a[i + 1]));
+        }
+      }
+      else {
+        if (a[i] == -1) {
+          swap(a[i], a[i + 1]);
+        }
+        if (a[i] <= k / 2) {
+          new_a.emplace_back(a[i]);
+          ans *= mint(++losers);
+        }
+        else {
+          new_a.emplace_back(-1);
+        }
+      }
+    }
+    swap(a, new_a);
+  }
+  cout << ans << '\n';
 }
 
 
